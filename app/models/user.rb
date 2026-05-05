@@ -7,9 +7,6 @@ class User < ApplicationRecord
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 8 }, if: -> { new_record? || password.present? }
 
-  def self.authenticate_by(email_address:, password:)
-    find_by(email_address: email_address.to_s.strip.downcase)&.authenticate(password)
-  end
 
   def generate_reset_token
     signed_id expires_in: 24.hours, purpose: :password_reset
