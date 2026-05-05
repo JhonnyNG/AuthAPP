@@ -44,12 +44,7 @@
               class: "input-premium" %>
         </div>
 
-        <div class="flex items-center justify-between text-sm pt-1">
-          <label class="flex items-center gap-2.5 cursor-pointer group">
-            <%= form.checkbox :remember_me,
-                class: "w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500/30" %>
-            <span class="text-slate-400 group-hover:text-slate-300 transition">Recuérdame</span>
-          </label>
+        <div class="flex items-center justify-end text-sm pt-1">
           <%= link_to "¿Olvidaste tu contraseña?", new_password_path,
               class: "text-blue-400 hover:text-blue-300 font-medium transition nav-link" %>
         </div>
