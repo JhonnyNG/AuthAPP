@@ -1,0 +1,78 @@
+<div class="mx-auto max-w-md py-8" data-controller="form">
+
+  <!-- Ambient glow behind card -->
+  <div class="relative">
+    <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 blur-2xl opacity-50 scale-95"></div>
+
+    <div class="relative rounded-3xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-2xl p-8 shadow-2xl animate-scale-in overflow-hidden"
+         style="box-shadow: 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)">
+
+      <!-- Header -->
+      <div class="mb-8 text-center">
+        <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 text-3xl shadow-xl shadow-blue-500/40 mb-4 animate-bounce-in">
+          🔑
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 blur-lg opacity-50 -z-10"></div>
+        </div>
+        <h1 class="text-3xl font-black text-white">Inicia sesión</h1>
+        <p class="mt-1.5 text-slate-400 text-sm">Accede a tu cuenta para continuar</p>
+      </div>
+
+      <!-- Form -->
+      <%= form_with url: session_url, class: "space-y-5 w-full min-w-0" do |form| %>
+
+        <div class="space-y-1.5 min-w-0 w-full">
+          <label class="block text-sm font-semibold text-slate-300" for="email_address">
+            Correo electrónico
+          </label>
+          <%= form.email_field :email_address,
+              required: true, autofocus: true,
+              autocomplete: "username",
+              placeholder: "tu@correo.com",
+              value: params[:email_address],
+              class: "input-premium" %>
+        </div>
+
+        <div class="space-y-1.5 min-w-0 w-full">
+          <label class="block text-sm font-semibold text-slate-300" for="password">
+            Contraseña
+          </label>
+          <%= form.password_field :password,
+              required: true,
+              autocomplete: "current-password",
+              placeholder: "••••••••",
+              maxlength: 72,
+              class: "input-premium" %>
+        </div>
+
+        <div class="flex items-center justify-between text-sm pt-1">
+          <label class="flex items-center gap-2.5 cursor-pointer group">
+            <%= form.checkbox :remember_me,
+                class: "w-4 h-4 rounded border-slate-700 bg-slate-950 text-blue-600 focus:ring-blue-500/30" %>
+            <span class="text-slate-400 group-hover:text-slate-300 transition">Recuérdame</span>
+          </label>
+          <%= link_to "¿Olvidaste tu contraseña?", new_password_path,
+              class: "text-blue-400 hover:text-blue-300 font-medium transition nav-link" %>
+        </div>
+
+        <%= form.submit "Ingresar",
+            class: "ripple-container w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/60 hover:scale-[1.02] transition duration-200 btn-glow cursor-pointer" %>
+      <% end %>
+
+      <!-- Divider -->
+      <div class="relative my-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-slate-800"></div>
+        </div>
+        <div class="relative flex justify-center text-xs text-slate-500">
+          <span class="px-3 bg-slate-900/60">¿No tienes cuenta?</span>
+        </div>
+      </div>
+
+      <!-- Register link -->
+      <%= link_to new_registration_path,
+          class: "w-full inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-800/40 px-6 py-3 text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-200" do %>
+        Crear cuenta nueva →
+      <% end %>
+    </div>
+  </div>
+</div>

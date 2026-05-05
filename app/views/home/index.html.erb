@@ -1,0 +1,257 @@
+<div class="space-y-24">
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════════════════ -->
+  <section class="min-h-[90vh] flex flex-col justify-center items-center py-20 relative">
+
+    <!-- Hero ambient -->
+    <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-glow-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:2s"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center w-full">
+
+      <!-- Left Content -->
+      <div class="space-y-8 reveal-left">
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-500/15 to-cyan-500/15 px-5 py-2.5 border border-blue-500/25 w-fit hover:border-blue-500/50 transition duration-300 cursor-default">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+          </span>
+          <span class="text-sm font-semibold text-blue-300">Autenticación moderna</span>
+        </div>
+
+        <!-- Title -->
+        <div class="space-y-3">
+          <h1 class="text-6xl md:text-7xl font-black tracking-tight leading-none">
+            <span class="block text-white">Seguridad</span>
+            <span class="gradient-text animate-gradient text-6xl md:text-7xl block">sin límites</span>
+          </h1>
+          <p class="text-xl text-slate-400 leading-relaxed max-w-xl">
+            Sistema de autenticación profesional diseñado para proteger tus accesos con tecnología moderna y confiable.
+          </p>
+        </div>
+
+        <!-- Stats row -->
+        <div class="flex gap-8 pt-2">
+          <div class="space-y-1">
+            <p class="text-3xl font-black text-white">100%</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Seguro</p>
+          </div>
+          <div class="w-px bg-slate-800"></div>
+          <div class="space-y-1">
+            <p class="text-3xl font-black text-white">0ms</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Latencia</p>
+          </div>
+          <div class="w-px bg-slate-800"></div>
+          <div class="space-y-1">
+            <p class="text-3xl font-black text-white">24/7</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Uptime</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <% if authenticated? %>
+          <div class="rounded-2xl border border-emerald-500/25 bg-emerald-500/8 backdrop-blur p-6 glass-morphism animate-scale-in">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
+              </span>
+              <p class="text-sm text-emerald-300 font-semibold">Sesión activa</p>
+            </div>
+            <p class="text-white font-semibold mb-4">
+              Conectado como <span class="gradient-text"><%= Current.user.email_address %></span>
+            </p>
+            <%= link_to "Cerrar sesión", session_path, data: { turbo_method: :delete },
+                class: "ripple-container w-full inline-flex justify-center items-center gap-2 rounded-xl bg-red-600/80 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-500 shadow-lg shadow-red-600/20 hover:shadow-red-600/40 hover-lift" %>
+          </div>
+        <% else %>
+          <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <%= link_to "Iniciar sesión", new_session_path,
+                class: "ripple-container group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/60 transition duration-300 hover:scale-105 btn-glow" %>
+            <%= link_to "Crear cuenta →", new_registration_path,
+                class: "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/40 px-8 py-4 text-base font-semibold text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-300 backdrop-blur" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Right Visual — 3D tilt icon -->
+      <div class="hidden lg:flex justify-center reveal-right" data-delay="200">
+        <div class="relative w-80 h-80 flex items-center justify-center">
+          <!-- Outer glow rings -->
+          <div class="absolute w-80 h-80 rounded-full border border-blue-500/10 animate-spin-slow"></div>
+          <div class="absolute w-64 h-64 rounded-full border border-cyan-500/10 animate-spin-slow" style="animation-direction:reverse;animation-duration:9s"></div>
+
+          <!-- Floating orbit dots -->
+          <div class="absolute w-80 h-80 animate-spin-slow" style="animation-duration:12s">
+            <div class="absolute top-4 left-1/2 h-3 w-3 -ml-1.5 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></div>
+          </div>
+          <div class="absolute w-64 h-64 animate-spin-slow" style="animation-direction:reverse;animation-duration:8s">
+            <div class="absolute bottom-2 right-4 h-2 w-2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"></div>
+          </div>
+
+          <!-- Main icon card with tilt -->
+          <div class="tilt-card relative w-52 h-52 rounded-3xl border border-blue-500/25 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center glass-morphism animate-float" style="transition:transform 0.1s ease">
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/5 to-cyan-500/5"></div>
+            <span class="text-8xl select-none">🔐</span>
+          </div>
+
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 rounded-xl border border-emerald-500/30 bg-emerald-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.5s">
+            <span class="text-xs font-semibold text-emerald-300">✓ Seguro</span>
+          </div>
+          <div class="absolute -bottom-4 -left-4 rounded-xl border border-blue-500/30 bg-blue-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.8s">
+            <span class="text-xs font-semibold text-blue-300">⚡ Rápido</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       FEATURES SECTION
+  ════════════════════════════════════════════ -->
+  <section class="py-16 space-y-14">
+    <div class="text-center space-y-4 reveal">
+      <div class="inline-flex items-center gap-2 rounded-full bg-slate-800/60 border border-slate-700/50 px-4 py-2 text-sm text-slate-400 mb-4">
+        ✦ Características
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+        Todo lo que necesitas
+      </h2>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+        Una plataforma completa para autenticación segura y profesional
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="group glass-card card-glow-blue rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="0">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-blue-500/30">🔒</div>
+        <h3 class="font-bold text-white mb-2">Encriptación</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Contraseñas protegidas con bcrypt, el estándar de seguridad más confiable.</p>
+      </div>
+
+      <div class="group glass-card card-glow-emerald rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="120">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-emerald-500/30">✓</div>
+        <h3 class="font-bold text-white mb-2">Validación</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Verificación completa de email y contraseña con reglas robustas.</p>
+      </div>
+
+      <div class="group glass-card card-glow-amber rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="240">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-amber-500/30">🔑</div>
+        <h3 class="font-bold text-white mb-2">Recuperación</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Tokens firmados seguros con expiración automática de 24 horas.</p>
+      </div>
+
+      <div class="group glass-card card-glow-purple rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="360">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-purple-500/30">⚡</div>
+        <h3 class="font-bold text-white mb-2">Rendimiento</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Arquitectura optimizada para máxima velocidad y seguridad.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       TECH STACK
+  ════════════════════════════════════════════ -->
+  <section class="py-16 space-y-14">
+    <div class="text-center space-y-4 reveal">
+      <div class="inline-flex items-center gap-2 rounded-full bg-slate-800/60 border border-slate-700/50 px-4 py-2 text-sm text-slate-400 mb-4">
+        ✦ Stack tecnológico
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+        Construido con lo mejor
+      </h2>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+        Tecnologías modernas y probadas en producción
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-blue-500/8 to-cyan-500/8 backdrop-blur p-8 text-center reveal" data-delay="0">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🚂</div>
+        <h3 class="font-bold text-white mb-2">Rails 8</h3>
+        <p class="text-sm text-slate-400">Framework web moderno y robusto para aplicaciones escalables</p>
+      </div>
+
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-green-500/8 to-emerald-500/8 backdrop-blur p-8 text-center reveal" data-delay="100">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🐘</div>
+        <h3 class="font-bold text-white mb-2">PostgreSQL</h3>
+        <p class="text-sm text-slate-400">Base de datos confiable con integridad referencial garantizada</p>
+      </div>
+
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-purple-500/8 to-pink-500/8 backdrop-blur p-8 text-center reveal" data-delay="200">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🎨</div>
+        <h3 class="font-bold text-white mb-2">Tailwind CSS</h3>
+        <p class="text-sm text-slate-400">Diseño moderno con utilidades CSS de última generación</p>
+      </div>
+
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-orange-500/8 to-red-500/8 backdrop-blur p-8 text-center reveal" data-delay="300">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🔐</div>
+        <h3 class="font-bold text-white mb-2">bcrypt</h3>
+        <p class="text-sm text-slate-400">Algoritmo de encriptación de contraseñas más seguro</p>
+      </div>
+
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-indigo-500/8 to-blue-500/8 backdrop-blur p-8 text-center reveal" data-delay="400">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🔗</div>
+        <h3 class="font-bold text-white mb-2">Signed IDs</h3>
+        <p class="text-sm text-slate-400">Rails signed identifiers para tokens seguros</p>
+      </div>
+
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-teal-500/8 to-green-500/8 backdrop-blur p-8 text-center reveal" data-delay="500">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">📨</div>
+        <h3 class="font-bold text-white mb-2">ActionMailer</h3>
+        <p class="text-sm text-slate-400">Sistema de email robusto para notificaciones seguras</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       CTA SECTION
+  ════════════════════════════════════════════ -->
+  <section class="py-16">
+    <div class="relative rounded-3xl border border-slate-700/50 bg-gradient-to-br from-slate-800/40 to-slate-900/40 backdrop-blur p-12 md:p-20 text-center space-y-8 overflow-hidden reveal">
+      <!-- CTA glow background -->
+      <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <!-- Decorative border glow -->
+      <div class="absolute inset-0 rounded-3xl pointer-events-none" style="background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,transparent 50%,rgba(6,182,212,0.08) 100%)"></div>
+
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-500/25 px-4 py-2 text-sm text-blue-300 mb-2">
+          🚀 Comienza ahora
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+          ¿Listo para empezar?
+        </h2>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+          Únete a nuestro sistema de autenticación seguro y profesional
+        </p>
+      </div>
+
+      <% unless authenticated? %>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <%= link_to "Registrarse ahora", new_registration_path,
+              class: "ripple-container inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-10 py-4 text-base font-semibold text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/60 hover:scale-105 transition duration-300 btn-glow" %>
+          <%= link_to "Ya tengo cuenta →", new_session_path,
+              class: "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/40 px-10 py-4 text-base font-semibold text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-300 backdrop-blur" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+</div>

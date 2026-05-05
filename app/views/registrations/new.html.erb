@@ -1,0 +1,106 @@
+<div class="mx-auto max-w-md py-8" data-controller="form">
+
+  <!-- Ambient glow behind card -->
+  <div class="relative">
+    <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 blur-2xl opacity-50 scale-95"></div>
+
+    <div class="relative rounded-3xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-2xl p-8 shadow-2xl animate-scale-in"
+         style="box-shadow: 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)">
+
+      <!-- Header -->
+      <div class="mb-8 text-center">
+        <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 text-3xl shadow-xl shadow-emerald-500/40 mb-4 animate-bounce-in">
+          ✨
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 blur-lg opacity-50 -z-10"></div>
+        </div>
+        <h1 class="text-3xl font-black text-white">Crear cuenta</h1>
+        <p class="mt-1.5 text-slate-400 text-sm">Únete y comienza a usar la plataforma</p>
+      </div>
+
+      <!-- Error messages -->
+      <% if @user.errors.any? %>
+        <div class="mb-6 rounded-2xl border border-red-500/30 bg-red-500/10 p-4 backdrop-blur animate-bounce-in">
+          <p class="font-semibold text-red-300 mb-3 text-sm flex items-center gap-2">
+            <span>⚠</span> Por favor corrige los errores:
+          </p>
+          <ul class="space-y-1.5 text-sm text-red-200">
+            <% @user.errors.full_messages.each do |message| %>
+              <li class="flex gap-2 items-start">
+                <span class="text-red-400 mt-0.5">•</span>
+                <span><%= message %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- Form -->
+      <%= form_with model: @user, url: registrations_path, class: "space-y-5" do |f| %>
+
+        <div class="space-y-1.5">
+          <%= f.label :email_address, "Correo electrónico",
+              class: "block text-sm font-semibold text-slate-300" %>
+          <%= f.email_field :email_address,
+              required: true, autofocus: true,
+              placeholder: "tu@correo.com",
+              class: "input-premium" %>
+        </div>
+
+        <!-- Password with strength meter -->
+        <div class="space-y-1.5">
+          <%= f.label :password, "Contraseña",
+              class: "block text-sm font-semibold text-slate-300" %>
+          <%= f.password_field :password,
+              required: true,
+              placeholder: "Mínimo 8 caracteres",
+              data: { form_target: "password" },
+              class: "input-premium" %>
+
+          <!-- Strength bar -->
+          <div class="space-y-2 pt-1">
+            <div class="h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+              <div class="strength-bar h-full w-0" data-form-target="strengthBar"></div>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex gap-1 text-xs text-slate-500">
+                <span data-form-target="checkLength" style="transition:color 0.3s ease">✗ Mínimo 8 caracteres</span>
+              </div>
+              <span class="text-xs font-semibold" data-form-target="strengthLabel" style="transition:color 0.3s ease"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <%= f.label :password_confirmation, "Confirmar contraseña",
+              class: "block text-sm font-semibold text-slate-300" %>
+          <%= f.password_field :password_confirmation,
+              required: true,
+              placeholder: "Repite tu contraseña",
+              data: { form_target: "confirmation" },
+              class: "input-premium" %>
+          <p class="text-xs" data-form-target="checkMatch" style="color:#94a3b8;transition:color 0.3s ease">
+            ✗ Las contraseñas no coinciden
+          </p>
+        </div>
+
+        <%= f.submit "Crear cuenta",
+            class: "ripple-container w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/60 hover:scale-[1.02] transition duration-200 cursor-pointer" %>
+      <% end %>
+
+      <!-- Divider -->
+      <div class="relative my-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-slate-800"></div>
+        </div>
+        <div class="relative flex justify-center text-xs text-slate-500">
+          <span class="px-3 bg-slate-900/60">¿Ya tienes cuenta?</span>
+        </div>
+      </div>
+
+      <%= link_to new_session_path,
+          class: "w-full inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-800/40 px-6 py-3 text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-200" do %>
+        Iniciar sesión →
+      <% end %>
+    </div>
+  </div>
+</div>

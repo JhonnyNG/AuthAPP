@@ -1,0 +1,29 @@
+<div class="mx-auto max-w-md animate-slideIn">
+  <div class="rounded-2xl border border-slate-700/50 bg-slate-900/50 backdrop-blur p-8 shadow-2xl">
+    <div class="mb-8 text-center">
+      <div class="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-2xl font-bold text-white shadow-lg shadow-amber-500/30 mb-4">🔓</div>
+      <h1 class="text-3xl font-bold text-white">Recuperar contraseña</h1>
+      <p class="mt-2 text-slate-400 text-sm">Te enviaremos un enlace para restablecer tu contraseña</p>
+    </div>
+
+    <%= form_with url: passwords_path, class: "space-y-6" do |form| %>
+      <div>
+        <label class="block text-sm font-semibold text-slate-200 mb-2" for="email_address">Correo electrónico</label>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "tu@correo.com", value: params[:email_address], class: "w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 placeholder-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition" %>
+      </div>
+
+      <p class="text-xs text-slate-400 italic">
+        Recibirás un correo con instrucciones si la cuenta existe en nuestro sistema.
+      </p>
+
+      <%= form.submit "Enviar instrucciones", class: "w-full inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transition" %>
+    <% end %>
+
+    <div class="mt-6 text-center">
+      <p class="text-sm text-slate-400">
+        ¿Ya recordaste tu contraseña? 
+        <%= link_to "Volver a iniciar sesión", new_session_path, class: "font-semibold text-blue-400 hover:text-blue-300 transition" %>
+      </p>
+    </div>
+  </div>
+</div>
