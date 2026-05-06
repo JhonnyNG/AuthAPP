@@ -1,12 +1,33 @@
 <% content_for :title, "Dashboard — Market Caótica" %>
 
 <%
-  ciudad_colors = {
-    "Santa Cruz"  => { bg: "bg-blue-500/15",   border: "border-blue-500/40",   text: "text-blue-300",   dot: "bg-blue-400"   },
-    "La Paz"      => { bg: "bg-violet-500/15",  border: "border-violet-500/40", text: "text-violet-300", dot: "bg-violet-400" },
-    "Cochabamba"  => { bg: "bg-emerald-500/15", border: "border-emerald-500/40",text: "text-emerald-300",dot: "bg-emerald-400" }
+  ciudad_styles = {
+    "Santa Cruz" => {
+      badge: "background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.5); color:#93c5fd;",
+      dot:   "background:#60a5fa;",
+      bar:   "background:linear-gradient(90deg,#3b82f6,#06b6d4);"
+    },
+    "La Paz" => {
+      badge: "background:rgba(139,92,246,0.15); border:1px solid rgba(139,92,246,0.5); color:#c4b5fd;",
+      dot:   "background:#a78bfa;",
+      bar:   "background:linear-gradient(90deg,#8b5cf6,#a855f7);"
+    },
+    "Cochabamba" => {
+      badge: "background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.5); color:#6ee7b7;",
+      dot:   "background:#34d399;",
+      bar:   "background:linear-gradient(90deg,#10b981,#14b8a6);"
+    }
   }
-  def_color = { bg: "bg-slate-500/15", border: "border-slate-500/40", text: "text-slate-300", dot: "bg-slate-400" }
+  def_city_style = {
+    badge: "background:rgba(100,116,139,0.15); border:1px solid rgba(100,116,139,0.4); color:#cbd5e1;",
+    dot:   "background:#94a3b8;",
+    bar:   "background:linear-gradient(90deg,#64748b,#475569);"
+  }
+  vendedor_bars = [
+    "background:linear-gradient(90deg,#f59e0b,#f97316);",
+    "background:linear-gradient(90deg,#8b5cf6,#ec4899);",
+    "background:linear-gradient(90deg,#3b82f6,#6366f1);"
+  ]
 %>
 
 <div class="space-y-10">
@@ -85,19 +106,23 @@
         <span class="h-5 w-1 rounded-full bg-gradient-to-b from-amber-400 to-orange-500"></span>
         Ventas por Ciudad
       </h2>
-      <div class="space-y-3">
+      <div class="space-y-4">
         <% max_city = @ventas_por_ciudad.map { |_, v| v }.max || 1 %>
-        <% city_palette = { "Santa Cruz" => "from-blue-500 to-cyan-500", "La Paz" => "from-violet-500 to-purple-500", "Cochabamba" => "from-emerald-500 to-teal-500" } %>
         <% @ventas_por_ciudad.each do |ciudad, total| %>
-          <div class="space-y-1">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-medium text-slate-300"><%= ciudad %></span>
-              <span class="font-bold text-white">Bs. <%= number_with_precision(total, precision: 2) %></span>
+          <% cs = ciudad_styles[ciudad] || def_city_style %>
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <span class="inline-block h-2.5 w-2.5 rounded-full" style="<%= cs[:dot] %>"></span>
+                <span class="text-sm font-semibold text-slate-200"><%= ciudad %></span>
+              </div>
+              <span class="text-sm font-bold text-white">Bs. <%= number_with_precision(total, precision: 2) %></span>
             </div>
-            <div class="h-2.5 w-full bg-slate-700/60 rounded-full overflow-hidden">
-              <div class="h-full rounded-full bg-gradient-to-r <%= city_palette[ciudad] || 'from-slate-500 to-slate-400' %> transition-all duration-700"
-                   style="width: <%= (total / max_city * 100).round %>%"></div>
+            <div class="h-3 w-full rounded-full overflow-hidden" style="background:rgba(51,65,85,0.6);">
+              <div class="h-full rounded-full transition-all duration-700"
+                   style="<%= cs[:bar] %> width:<%= (total / max_city * 100).round %>%;"></div>
             </div>
+            <p class="text-xs text-slate-500"><%= ((total / @total_ventas) * 100).round(1) %>% del total</p>
           </div>
         <% end %>
       </div>
@@ -109,19 +134,26 @@
         <span class="h-5 w-1 rounded-full bg-gradient-to-b from-violet-400 to-purple-500"></span>
         Rendimiento por Vendedor
       </h2>
-      <div class="space-y-3">
+      <div class="space-y-4">
         <% max_v = @ventas_por_vendedor.map { |_, v| v }.max || 1 %>
-        <% vendedor_palette = ["from-amber-500 to-orange-500", "from-violet-500 to-pink-500", "from-blue-500 to-indigo-500"] %>
         <% @ventas_por_vendedor.each_with_index do |(vendedor, total), i| %>
-          <div class="space-y-1">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-medium text-slate-300"><%= vendedor %></span>
-              <span class="font-bold text-white">Bs. <%= number_with_precision(total, precision: 2) %></span>
+          <% vbar = vendedor_bars[i % vendedor_bars.size] %>
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <div class="h-7 w-7 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
+                     style="<%= vbar %>">
+                  <%= vendedor.split.map(&:first).join.upcase[0..1] %>
+                </div>
+                <span class="text-sm font-semibold text-slate-200"><%= vendedor %></span>
+              </div>
+              <span class="text-sm font-bold text-white">Bs. <%= number_with_precision(total, precision: 2) %></span>
             </div>
-            <div class="h-2.5 w-full bg-slate-700/60 rounded-full overflow-hidden">
-              <div class="h-full rounded-full bg-gradient-to-r <%= vendedor_palette[i % vendedor_palette.size] %> transition-all duration-700"
-                   style="width: <%= (total / max_v * 100).round %>%"></div>
+            <div class="h-3 w-full rounded-full overflow-hidden" style="background:rgba(51,65,85,0.6);">
+              <div class="h-full rounded-full transition-all duration-700"
+                   style="<%= vbar %> width:<%= (total / max_v * 100).round %>%;"></div>
             </div>
+            <p class="text-xs text-slate-500"><%= ((total / @total_ventas) * 100).round(1) %>% del total • <%= OrdenCaotica.where(vendedor_nombre: vendedor).count %> órdenes</p>
           </div>
         <% end %>
       </div>
@@ -151,23 +183,27 @@
         <div class="relative">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">🔍</span>
           <%= f.text_field :q, value: @busqueda, placeholder: "Buscar cliente...",
-              class: "pl-9 pr-4 py-2 text-sm bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/30 transition w-48" %>
+              class: "pl-9 pr-4 py-2 text-sm rounded-xl text-white placeholder-slate-500 focus:outline-none transition w-48",
+              style: "background:rgba(51,65,85,0.7); border:1px solid rgba(100,116,139,0.5);" %>
         </div>
 
         <!-- Filter by city -->
         <%= f.select :ciudad,
-            options_for_select([["🌍 Todas las ciudades", ""]] + @ciudades.map { |c| [c, c] }, @ciudad),
+            options_for_select([["🌆 Todas las ciudades", ""]] + @ciudades.map { |c| [c, c] }, @ciudad),
             {},
-            class: "px-4 py-2 text-sm bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:border-amber-500/50 transition cursor-pointer" %>
+            class: "px-4 py-2 text-sm rounded-xl text-white cursor-pointer focus:outline-none appearance-none",
+            style: "background:rgba(51,65,85,0.9); border:1px solid rgba(100,116,139,0.5); color:#e2e8f0;" %>
 
         <!-- Filter by vendor -->
         <%= f.select :vendedor,
             options_for_select([["👤 Todos los vendedores", ""]] + @vendedores.map { |v| [v, v] }, @vendedor),
             {},
-            class: "px-4 py-2 text-sm bg-slate-700/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:border-amber-500/50 transition cursor-pointer" %>
+            class: "px-4 py-2 text-sm rounded-xl text-white cursor-pointer focus:outline-none appearance-none",
+            style: "background:rgba(51,65,85,0.9); border:1px solid rgba(100,116,139,0.5); color:#e2e8f0;" %>
 
         <%= f.submit "Filtrar",
-            class: "px-5 py-2 text-sm font-semibold bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl hover:from-amber-400 hover:to-orange-400 transition cursor-pointer shadow-lg shadow-amber-500/20" %>
+            class: "px-5 py-2 text-sm font-semibold text-white rounded-xl transition cursor-pointer",
+            style: "background:linear-gradient(135deg,#f59e0b,#f97316); box-shadow:0 4px 16px rgba(245,158,11,0.3);" %>
       <% end %>
     </div>
 
@@ -188,10 +224,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-700/30">
-          <% @ordenes.each_with_index do |orden, i| %>
-            <%
-              colors = ciudad_colors[orden.sucursal_ciudad] || def_color
-            %>
+          <% @ordenes.each do |orden| %>
             <tr class="hover:bg-slate-700/20 transition duration-150 group">
               <td class="px-4 py-3.5 text-slate-500 font-mono text-xs">#<%= orden.id_orden %></td>
               <td class="px-4 py-3.5 text-slate-300 whitespace-nowrap">
@@ -220,8 +253,9 @@
               </td>
               <td class="px-4 py-3.5 text-slate-400 text-xs whitespace-nowrap"><%= orden.sucursal_nombre %></td>
               <td class="px-4 py-3.5">
-                <span class="inline-flex items-center gap-1.5 rounded-full <%= colors[:bg] %> border <%= colors[:border] %> px-2.5 py-1 text-xs font-semibold <%= colors[:text] %> whitespace-nowrap">
-                  <span class="h-1.5 w-1.5 rounded-full <%= colors[:dot] %>"></span>
+                <% cs2 = ciudad_styles[orden.sucursal_ciudad] || def_city_style %>
+                <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap" style="<%= cs2[:badge] %>">
+                  <span class="h-1.5 w-1.5 rounded-full" style="<%= cs2[:dot] %>"></span>
                   <%= orden.sucursal_ciudad %>
                 </span>
               </td>
