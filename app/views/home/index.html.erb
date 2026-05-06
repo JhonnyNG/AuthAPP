@@ -1,14 +1,17 @@
-<div class="space-y-24">
+<% content_for :title, "Market Caótica — Mini Market Bolivia" %>
+
+<div class="space-y-28">
 
   <!-- ═══════════════════════════════════════════
        HERO SECTION
   ════════════════════════════════════════════ -->
-  <section class="min-h-[90vh] flex flex-col justify-center items-center py-20 relative">
+  <section class="min-h-[88vh] flex flex-col justify-center items-center py-20 relative">
 
-    <!-- Hero ambient -->
+    <!-- Ambient blobs amber/orange -->
     <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-glow-pulse"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:2s"></div>
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-glow-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:2s"></div>
+      <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:4s"></div>
     </div>
 
     <div class="grid lg:grid-cols-2 gap-16 items-center w-full">
@@ -17,44 +20,44 @@
       <div class="space-y-8 reveal-left">
 
         <!-- Badge -->
-        <div class="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-blue-500/15 to-cyan-500/15 px-5 py-2.5 border border-blue-500/25 w-fit hover:border-blue-500/50 transition duration-300 cursor-default">
+        <div class="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-amber-500/15 to-orange-500/15 px-5 py-2.5 border border-amber-500/25 w-fit hover:border-amber-500/50 transition duration-300 cursor-default">
           <span class="relative flex h-2 w-2">
-            <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+            <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
           </span>
-          <span class="text-sm font-semibold text-blue-300">Autenticación moderna</span>
+          <span class="text-sm font-semibold text-amber-300">3 sucursales activas • Bolivia</span>
         </div>
 
         <!-- Title -->
         <div class="space-y-3">
           <h1 class="text-6xl md:text-7xl font-black tracking-tight leading-none">
-            <span class="block text-white">Seguridad</span>
-            <span class="gradient-text animate-gradient text-6xl md:text-7xl block">sin límites</span>
+            <span class="block text-white">Market</span>
+            <span class="block" style="background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #f97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Caótica</span>
           </h1>
           <p class="text-xl text-slate-400 leading-relaxed max-w-xl">
-            Sistema de autenticación profesional diseñado para proteger tus accesos con tecnología moderna y confiable.
+            Sistema integral de gestión de ventas para el Mini Market Caótica. Controla tus órdenes, vendedores y sucursales desde un solo lugar.
           </p>
         </div>
 
         <!-- Stats row -->
         <div class="flex gap-8 pt-2">
           <div class="space-y-1">
-            <p class="text-3xl font-black text-white">100%</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wider">Seguro</p>
+            <p class="text-3xl font-black text-white">15+</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Órdenes</p>
           </div>
           <div class="w-px bg-slate-800"></div>
           <div class="space-y-1">
-            <p class="text-3xl font-black text-white">0ms</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wider">Latencia</p>
+            <p class="text-3xl font-black text-white">3</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Ciudades</p>
           </div>
           <div class="w-px bg-slate-800"></div>
           <div class="space-y-1">
-            <p class="text-3xl font-black text-white">24/7</p>
-            <p class="text-xs text-slate-500 uppercase tracking-wider">Uptime</p>
+            <p class="text-3xl font-black text-white">5</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider">Clientes</p>
           </div>
         </div>
 
-        <!-- CTA -->
+        <!-- CTA Buttons -->
         <% if authenticated? %>
           <div class="rounded-2xl border border-emerald-500/25 bg-emerald-500/8 backdrop-blur p-6 glass-morphism animate-scale-in">
             <div class="flex items-center gap-3 mb-3">
@@ -65,49 +68,113 @@
               <p class="text-sm text-emerald-300 font-semibold">Sesión activa</p>
             </div>
             <p class="text-white font-semibold mb-4">
-              Conectado como <span class="gradient-text"><%= Current.user.email_address %></span>
+              Bienvenido, <span style="background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"><%= Current.user.email_address %></span>
             </p>
-            <%= link_to "Cerrar sesión", session_path, data: { turbo_method: :delete },
-                class: "ripple-container w-full inline-flex justify-center items-center gap-2 rounded-xl bg-red-600/80 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-500 shadow-lg shadow-red-600/20 hover:shadow-red-600/40 hover-lift" %>
+            <%= link_to "📊 Ir al Dashboard →", ordenes_caoticas_path,
+                class: "ripple-container w-full inline-flex justify-center items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white transition shadow-lg hover-lift"
+                .tap { },
+                style: "background: linear-gradient(135deg, #f59e0b, #ef4444, #f97316); box-shadow: 0 8px 32px rgba(245,158,11,0.3);" %>
           </div>
         <% else %>
           <div class="flex flex-col sm:flex-row gap-4 pt-2">
-            <%= link_to "Iniciar sesión", new_session_path,
-                class: "ripple-container group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/60 transition duration-300 hover:scale-105 btn-glow" %>
+            <%= link_to "🚀 Ingresar al sistema", new_session_path,
+                class: "ripple-container group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-bold text-white shadow-lg hover:scale-105 transition duration-300",
+                style: "background: linear-gradient(135deg, #f59e0b, #ef4444, #f97316); box-shadow: 0 8px 32px rgba(245,158,11,0.3);" %>
             <%= link_to "Crear cuenta →", new_registration_path,
                 class: "group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/40 px-8 py-4 text-base font-semibold text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-300 backdrop-blur" %>
           </div>
         <% end %>
       </div>
 
-      <!-- Right Visual — 3D tilt icon -->
+      <!-- Right Visual — animated market icon -->
       <div class="hidden lg:flex justify-center reveal-right" data-delay="200">
         <div class="relative w-80 h-80 flex items-center justify-center">
-          <!-- Outer glow rings -->
-          <div class="absolute w-80 h-80 rounded-full border border-blue-500/10 animate-spin-slow"></div>
-          <div class="absolute w-64 h-64 rounded-full border border-cyan-500/10 animate-spin-slow" style="animation-direction:reverse;animation-duration:9s"></div>
 
-          <!-- Floating orbit dots -->
+          <!-- Outer rings -->
+          <div class="absolute w-80 h-80 rounded-full border border-amber-500/10 animate-spin-slow"></div>
+          <div class="absolute w-64 h-64 rounded-full border border-orange-500/10 animate-spin-slow" style="animation-direction:reverse;animation-duration:9s"></div>
+
+          <!-- Floating dots -->
           <div class="absolute w-80 h-80 animate-spin-slow" style="animation-duration:12s">
-            <div class="absolute top-4 left-1/2 h-3 w-3 -ml-1.5 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></div>
+            <div class="absolute top-4 left-1/2 h-3 w-3 -ml-1.5 rounded-full bg-amber-500 shadow-lg shadow-amber-500/50"></div>
           </div>
           <div class="absolute w-64 h-64 animate-spin-slow" style="animation-direction:reverse;animation-duration:8s">
-            <div class="absolute bottom-2 right-4 h-2 w-2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"></div>
+            <div class="absolute bottom-2 right-4 h-2 w-2 rounded-full bg-orange-400 shadow-lg shadow-orange-400/50"></div>
           </div>
 
-          <!-- Main icon card with tilt -->
-          <div class="tilt-card relative w-52 h-52 rounded-3xl border border-blue-500/25 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 flex items-center justify-center glass-morphism animate-float" style="transition:transform 0.1s ease">
-            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/5 to-cyan-500/5"></div>
-            <span class="text-8xl select-none">🔐</span>
+          <!-- Main icon -->
+          <div class="tilt-card relative w-52 h-52 rounded-3xl flex items-center justify-center animate-float"
+               style="border: 1px solid rgba(245,158,11,0.25); background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(239,68,68,0.08)); backdrop-filter: blur(20px); transition: transform 0.1s ease;">
+            <span class="text-9xl select-none">🛒</span>
           </div>
 
           <!-- Floating badges -->
-          <div class="absolute -top-4 -right-4 rounded-xl border border-emerald-500/30 bg-emerald-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.5s">
-            <span class="text-xs font-semibold text-emerald-300">✓ Seguro</span>
+          <div class="absolute -top-4 -right-4 rounded-xl border border-amber-500/30 bg-amber-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.5s">
+            <span class="text-xs font-semibold text-amber-300">📍 Santa Cruz</span>
           </div>
-          <div class="absolute -bottom-4 -left-4 rounded-xl border border-blue-500/30 bg-blue-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.8s">
-            <span class="text-xs font-semibold text-blue-300">⚡ Rápido</span>
+          <div class="absolute -bottom-4 -left-4 rounded-xl border border-violet-500/30 bg-violet-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:0.8s">
+            <span class="text-xs font-semibold text-violet-300">📍 La Paz</span>
           </div>
+          <div class="absolute top-1/2 -right-8 rounded-xl border border-emerald-500/30 bg-emerald-500/15 px-3 py-1.5 backdrop-blur animate-bounce-in" style="animation-delay:1.1s">
+            <span class="text-xs font-semibold text-emerald-300">📍 Cochabamba</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       SUCURSALES SECTION
+  ════════════════════════════════════════════ -->
+  <section class="py-8 space-y-12">
+    <div class="text-center space-y-4 reveal">
+      <div class="inline-flex items-center gap-2 rounded-full bg-slate-800/60 border border-slate-700/50 px-4 py-2 text-sm text-slate-400 mb-4">
+        🏪 Nuestras sucursales
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+        Presencia nacional
+      </h2>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
+        Mini Market Caótica con cobertura en las tres ciudades principales de Bolivia
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Santa Cruz -->
+      <div class="group glass-card rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-500/6 to-cyan-500/4 backdrop-blur p-8 text-center reveal hover:border-blue-500/40 transition duration-300" data-delay="0">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🌴</div>
+        <h3 class="font-bold text-white text-xl mb-1">Santa Cruz</h3>
+        <p class="text-blue-300 text-sm font-medium mb-3">Sucursal Norte</p>
+        <p class="text-slate-400 text-sm">El Oriente boliviano. Centro económico del país con mayor volumen de ventas.</p>
+        <div class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-blue-500/15 border border-blue-500/25 px-3 py-1 text-xs text-blue-300">
+          <span class="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          Carlos Gómez — Vendedor líder
+        </div>
+      </div>
+
+      <!-- La Paz -->
+      <div class="group glass-card rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-500/6 to-purple-500/4 backdrop-blur p-8 text-center reveal hover:border-violet-500/40 transition duration-300" data-delay="120">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">⛰️</div>
+        <h3 class="font-bold text-white text-xl mb-1">La Paz</h3>
+        <p class="text-violet-300 text-sm font-medium mb-3">Sucursal Sur</p>
+        <p class="text-slate-400 text-sm">La sede de gobierno. Ciudad de las alturas con clientela diversa y fiel.</p>
+        <div class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-violet-500/15 border border-violet-500/25 px-3 py-1 text-xs text-violet-300">
+          <span class="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse"></span>
+          María Rojas — Vendedora
+        </div>
+      </div>
+
+      <!-- Cochabamba -->
+      <div class="group glass-card rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/6 to-teal-500/4 backdrop-blur p-8 text-center reveal hover:border-emerald-500/40 transition duration-300" data-delay="240">
+        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🌾</div>
+        <h3 class="font-bold text-white text-xl mb-1">Cochabamba</h3>
+        <p class="text-emerald-300 text-sm font-medium mb-3">Sucursal Este</p>
+        <p class="text-slate-400 text-sm">La ciudad jardín. Valle productivo con demanda creciente de productos frescos.</p>
+        <div class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/25 px-3 py-1 text-xs text-emerald-300">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          José Mamani — Vendedor
         </div>
       </div>
     </div>
@@ -118,42 +185,36 @@
   <!-- ═══════════════════════════════════════════
        FEATURES SECTION
   ════════════════════════════════════════════ -->
-  <section class="py-16 space-y-14">
+  <section class="py-8 space-y-12">
     <div class="text-center space-y-4 reveal">
       <div class="inline-flex items-center gap-2 rounded-full bg-slate-800/60 border border-slate-700/50 px-4 py-2 text-sm text-slate-400 mb-4">
-        ✦ Características
+        ✦ Sistema de gestión
       </div>
       <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
-        Todo lo que necesitas
+        Todo bajo control
       </h2>
-      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-        Una plataforma completa para autenticación segura y profesional
-      </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="group glass-card card-glow-blue rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="0">
-        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-blue-500/30">🔒</div>
-        <h3 class="font-bold text-white mb-2">Encriptación</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Contraseñas protegidas con bcrypt, el estándar de seguridad más confiable.</p>
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="0">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-amber-500/30">📦</div>
+        <h3 class="font-bold text-white mb-2">Gestión de Órdenes</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Registro completo de todas las transacciones con items, fechas y clientes.</p>
       </div>
-
-      <div class="group glass-card card-glow-emerald rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="120">
-        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-emerald-500/30">✓</div>
-        <h3 class="font-bold text-white mb-2">Validación</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Verificación completa de email y contraseña con reglas robustas.</p>
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="100">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-blue-500/30">📊</div>
+        <h3 class="font-bold text-white mb-2">Dashboard Analítico</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">KPIs en tiempo real con gráficos de ventas por ciudad y vendedor.</p>
       </div>
-
-      <div class="group glass-card card-glow-amber rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="240">
-        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-amber-500/30">🔑</div>
-        <h3 class="font-bold text-white mb-2">Recuperación</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Tokens firmados seguros con expiración automática de 24 horas.</p>
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="200">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-emerald-500/30">🔒</div>
+        <h3 class="font-bold text-white mb-2">Acceso Seguro</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Autenticación nativa de Rails con bcrypt y gestión de sesiones seguras.</p>
       </div>
-
-      <div class="group glass-card card-glow-purple rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="360">
-        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-purple-500/30">⚡</div>
-        <h3 class="font-bold text-white mb-2">Rendimiento</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Arquitectura optimizada para máxima velocidad y seguridad.</p>
+      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-slate-800/20 backdrop-blur p-6 reveal" data-delay="300">
+        <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-pink-600 text-2xl mb-5 group-hover:scale-110 group-hover:rotate-3 transition duration-300 shadow-lg shadow-violet-500/30">🔍</div>
+        <h3 class="font-bold text-white mb-2">Filtros Avanzados</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Busca por cliente, filtra por ciudad o vendedor en segundos.</p>
       </div>
     </div>
   </section>
@@ -161,95 +222,38 @@
   <div class="section-divider"></div>
 
   <!-- ═══════════════════════════════════════════
-       TECH STACK
+       CTA FINAL
   ════════════════════════════════════════════ -->
-  <section class="py-16 space-y-14">
-    <div class="text-center space-y-4 reveal">
-      <div class="inline-flex items-center gap-2 rounded-full bg-slate-800/60 border border-slate-700/50 px-4 py-2 text-sm text-slate-400 mb-4">
-        ✦ Stack tecnológico
-      </div>
-      <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
-        Construido con lo mejor
-      </h2>
-      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-        Tecnologías modernas y probadas en producción
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-blue-500/8 to-cyan-500/8 backdrop-blur p-8 text-center reveal" data-delay="0">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🚂</div>
-        <h3 class="font-bold text-white mb-2">Rails 8</h3>
-        <p class="text-sm text-slate-400">Framework web moderno y robusto para aplicaciones escalables</p>
-      </div>
-
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-green-500/8 to-emerald-500/8 backdrop-blur p-8 text-center reveal" data-delay="100">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🐘</div>
-        <h3 class="font-bold text-white mb-2">PostgreSQL</h3>
-        <p class="text-sm text-slate-400">Base de datos confiable con integridad referencial garantizada</p>
-      </div>
-
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-purple-500/8 to-pink-500/8 backdrop-blur p-8 text-center reveal" data-delay="200">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🎨</div>
-        <h3 class="font-bold text-white mb-2">Tailwind CSS</h3>
-        <p class="text-sm text-slate-400">Diseño moderno con utilidades CSS de última generación</p>
-      </div>
-
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-orange-500/8 to-red-500/8 backdrop-blur p-8 text-center reveal" data-delay="300">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🔐</div>
-        <h3 class="font-bold text-white mb-2">bcrypt</h3>
-        <p class="text-sm text-slate-400">Algoritmo de encriptación de contraseñas más seguro</p>
-      </div>
-
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-indigo-500/8 to-blue-500/8 backdrop-blur p-8 text-center reveal" data-delay="400">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🔗</div>
-        <h3 class="font-bold text-white mb-2">Signed IDs</h3>
-        <p class="text-sm text-slate-400">Rails signed identifiers para tokens seguros</p>
-      </div>
-
-      <div class="group glass-card rounded-2xl border border-slate-700/50 bg-gradient-to-br from-teal-500/8 to-green-500/8 backdrop-blur p-8 text-center reveal" data-delay="500">
-        <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">📨</div>
-        <h3 class="font-bold text-white mb-2">ActionMailer</h3>
-        <p class="text-sm text-slate-400">Sistema de email robusto para notificaciones seguras</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ═══════════════════════════════════════════
-       CTA SECTION
-  ════════════════════════════════════════════ -->
-  <section class="py-16">
+  <section class="py-8">
     <div class="relative rounded-3xl border border-slate-700/50 bg-gradient-to-br from-slate-800/40 to-slate-900/40 backdrop-blur p-12 md:p-20 text-center space-y-8 overflow-hidden reveal">
-      <!-- CTA glow background -->
       <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-500/8 rounded-full blur-3xl"></div>
       </div>
-
-      <!-- Decorative border glow -->
-      <div class="absolute inset-0 rounded-3xl pointer-events-none" style="background:linear-gradient(135deg,rgba(59,130,246,0.08) 0%,transparent 50%,rgba(6,182,212,0.08) 100%)"></div>
+      <div class="absolute inset-0 rounded-3xl pointer-events-none" style="background:linear-gradient(135deg,rgba(245,158,11,0.06) 0%,transparent 50%,rgba(239,68,68,0.06) 100%)"></div>
 
       <div class="space-y-4">
-        <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-500/25 px-4 py-2 text-sm text-blue-300 mb-2">
-          🚀 Comienza ahora
-        </div>
+        <div class="text-5xl">🛒</div>
         <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
-          ¿Listo para empezar?
+          ¿Listo para gestionar?
         </h2>
         <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-          Únete a nuestro sistema de autenticación seguro y profesional
+          Accede al sistema y controla todas las ventas del Mini Market Caótica
         </p>
       </div>
 
       <% unless authenticated? %>
         <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <%= link_to "Registrarse ahora", new_registration_path,
-              class: "ripple-container inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-10 py-4 text-base font-semibold text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/60 hover:scale-105 transition duration-300 btn-glow" %>
-          <%= link_to "Ya tengo cuenta →", new_session_path,
+          <%= link_to "🚀 Ingresar ahora", new_session_path,
+              class: "ripple-container inline-flex items-center justify-center gap-2 rounded-xl px-10 py-4 text-base font-bold text-white shadow-xl hover:scale-105 transition duration-300",
+              style: "background: linear-gradient(135deg, #f59e0b, #ef4444, #f97316); box-shadow: 0 8px 32px rgba(245,158,11,0.35);" %>
+          <%= link_to "Crear cuenta →", new_registration_path,
               class: "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/40 px-10 py-4 text-base font-semibold text-white hover:bg-slate-700/60 hover:border-slate-600 transition duration-300 backdrop-blur" %>
         </div>
+      <% else %>
+        <%= link_to "📊 Ver Dashboard →", ordenes_caoticas_path,
+            class: "ripple-container inline-flex items-center justify-center gap-2 rounded-xl px-10 py-4 text-base font-bold text-white shadow-xl hover:scale-105 transition duration-300",
+            style: "background: linear-gradient(135deg, #f59e0b, #ef4444, #f97316); box-shadow: 0 8px 32px rgba(245,158,11,0.35);" %>
       <% end %>
     </div>
   </section>

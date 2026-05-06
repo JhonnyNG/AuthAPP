@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title><%= content_for(:title) || "Auth App" %></title>
+    <title><%= content_for(:title) || "Market Caótica" %></title>
+    <meta name="description" content="Sistema de gestión de ventas del Mini Market Caótica — Bolivia">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -40,9 +41,9 @@
 
     <!-- Background ambient blobs -->
     <div class="fixed inset-0 -z-20 overflow-hidden pointer-events-none">
-      <div class="absolute top-0 -left-40 w-96 h-96 bg-blue-500/8 rounded-full blur-3xl animate-glow-pulse"></div>
-      <div class="absolute -top-40 right-0 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:1.5s"></div>
-      <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-violet-500/5 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:3s"></div>
+      <div class="absolute top-0 -left-40 w-96 h-96 bg-amber-500/6 rounded-full blur-3xl animate-glow-pulse"></div>
+      <div class="absolute -top-40 right-0 w-96 h-96 bg-orange-500/6 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:1.5s"></div>
+      <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-red-500/4 rounded-full blur-3xl animate-glow-pulse" style="animation-delay:3s"></div>
     </div>
 
     <!-- ════════════════════════ HEADER ════════════════════════ -->
@@ -52,17 +53,20 @@
 
           <!-- Logo -->
           <div class="flex items-center gap-3">
-            <div class="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-lg font-bold text-white shadow-lg animate-glow-pulse hover:scale-110 transition duration-300">
-              🔐
-              <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 blur-md opacity-50 -z-10"></div>
+            <div class="relative flex h-11 w-11 items-center justify-center rounded-xl text-lg font-bold text-white shadow-lg animate-glow-pulse hover:scale-110 transition duration-300"
+                 style="background: linear-gradient(135deg, #f59e0b, #ef4444, #f97316); box-shadow: 0 4px 20px rgba(245,158,11,0.3);">
+              🛒
+              <div class="absolute inset-0 rounded-xl blur-md opacity-40 -z-10" style="background: linear-gradient(135deg, #f59e0b, #f97316)"></div>
             </div>
-            <%= link_to "Auth App", root_path, class: "text-xl font-black tracking-tight text-white hover:text-blue-300 transition nav-link" %>
+            <%= link_to "Market Caótica", root_path, class: "text-xl font-black tracking-tight text-white hover:text-amber-300 transition nav-link" %>
           </div>
 
           <!-- Navigation -->
           <nav class="hidden md:flex items-center gap-8">
             <% if authenticated? %>
               <div class="flex items-center gap-3">
+                <%= link_to "📊 Dashboard", ordenes_caoticas_path,
+                    class: "text-sm font-medium text-slate-300 hover:text-amber-300 transition nav-link" %>
                 <div class="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5">
                   <span class="relative flex h-2 w-2">
                     <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -77,16 +81,18 @@
               <%= link_to "Iniciar sesión", new_session_path,
                   class: "text-sm font-medium text-slate-300 hover:text-white transition nav-link" %>
               <%= link_to "Registrarse", new_registration_path,
-                  class: "ripple-container inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition duration-200 btn-glow" %>
+                  class: "ripple-container inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition duration-200 hover:scale-105",
+                  style: "background: linear-gradient(135deg, #f59e0b, #f97316); box-shadow: 0 4px 16px rgba(245,158,11,0.3);" %>
             <% end %>
           </nav>
 
           <!-- Mobile menu -->
           <div class="md:hidden flex items-center gap-3">
             <% if authenticated? %>
+              <%= link_to "Dashboard", ordenes_caoticas_path, class: "text-sm font-medium text-amber-300 hover:text-amber-200 transition" %>
               <%= link_to "Salir", session_path, data: { turbo_method: :delete }, class: "text-sm font-medium text-red-300 hover:text-red-200 transition" %>
             <% else %>
-              <%= link_to "Ingresar", new_session_path, class: "text-sm font-medium text-blue-300 hover:text-blue-200 transition" %>
+              <%= link_to "Ingresar", new_session_path, class: "text-sm font-medium text-amber-300 hover:text-amber-200 transition" %>
             <% end %>
           </div>
         </div>
@@ -126,30 +132,31 @@
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <div class="space-y-3">
             <div class="flex items-center gap-2">
-              <div class="h-7 w-7 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-sm">🔐</div>
-              <h3 class="font-bold text-white">Auth App</h3>
+              <div class="h-7 w-7 rounded-lg flex items-center justify-center text-sm"
+                   style="background: linear-gradient(135deg, #f59e0b, #f97316)">🛒</div>
+              <h3 class="font-bold text-white">Market Caótica</h3>
             </div>
-            <p class="text-sm text-slate-400 leading-relaxed">Sistema profesional de autenticación y gestión de sesiones.</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Sistema integral de gestión de ventas para el Mini Market Caótica — Bolivia.</p>
           </div>
           <div class="space-y-3">
             <h3 class="font-bold text-white">Tecnología</h3>
             <ul class="text-sm text-slate-400 space-y-1.5">
-              <li class="flex items-center gap-2"><span class="text-blue-400">▸</span> Rails 8</li>
-              <li class="flex items-center gap-2"><span class="text-blue-400">▸</span> PostgreSQL</li>
-              <li class="flex items-center gap-2"><span class="text-blue-400">▸</span> Tailwind CSS</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">▸</span> Rails 8</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">▸</span> PostgreSQL</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">▸</span> Tailwind CSS</li>
             </ul>
           </div>
           <div class="space-y-3">
-            <h3 class="font-bold text-white">Info</h3>
-            <p class="text-sm text-slate-400">Versión 1.0 • 2026</p>
-            <div class="flex items-center gap-1.5">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span class="text-xs text-emerald-400 font-medium">Todos los sistemas activos</span>
-            </div>
+            <h3 class="font-bold text-white">Sucursales</h3>
+            <ul class="text-sm text-slate-400 space-y-1.5">
+              <li class="flex items-center gap-2"><span class="text-blue-400">●</span> Norte — Santa Cruz</li>
+              <li class="flex items-center gap-2"><span class="text-violet-400">●</span> Sur — La Paz</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">●</span> Este — Cochabamba</li>
+            </ul>
           </div>
         </div>
         <div class="border-t border-slate-800/50 pt-8 text-center text-sm text-slate-500">
-          <p>© 2026 Auth App. Todos los derechos reservados.</p>
+          <p>© 2026 Market Caótica. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_30_000000) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_06_030035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "ordenes_caoticas", force: :cascade do |t|
+    t.integer "id_orden"
+    t.date "fecha"
+    t.string "cliente_nombre"
+    t.string "cliente_dni"
+    t.string "cliente_direccion"
+    t.text "items_comprados"
+    t.string "sucursal_nombre"
+    t.string "sucursal_ciudad"
+    t.string "vendedor_nombre"
+    t.decimal "precio_total", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
