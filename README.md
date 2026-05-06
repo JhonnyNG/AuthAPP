@@ -41,4 +41,5 @@ bundle exec rails server
 
 * El proyecto usa PostgreSQL por defecto. Ajusta `config/database.yml` si necesitas otro usuario, contraseña o puerto.
 * Si aún no tienes Ruby en Windows, instala Ruby y agrega `ruby` y `bundle` a tu PATH.
+* Última actualización para forzar deploy en Render.
 
